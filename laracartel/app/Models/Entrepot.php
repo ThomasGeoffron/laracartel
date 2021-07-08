@@ -10,4 +10,8 @@ class Entrepot extends Model
     use HasFactory;
 
     protected $table = "entrepot";
+
+    public function gerant() {
+        return $this->belongsTo(User::class, 'gerant');
+    }
 }

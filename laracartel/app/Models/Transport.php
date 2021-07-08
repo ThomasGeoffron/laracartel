@@ -11,4 +11,8 @@ class Transport extends Model
 
 
     protected $table = "transport";
+
+    public function user() {
+        return $this->belongsTo(User::class, 'user');
+    }
 }
