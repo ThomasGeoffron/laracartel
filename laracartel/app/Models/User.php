@@ -44,4 +44,8 @@ class User extends Authenticatable
     public function superieur() {
         return $this->belongsTo(User::class, 'superieur');
     }
+
+    public function roles() {
+        return $this->belongsToMany('App\Models\Role');
+    }
 }
