@@ -108,6 +108,7 @@
       <path value="$PROJECT_DIR$/laracartel/vendor/graham-campbell/result-type" />
       <path value="$PROJECT_DIR$/laracartel/vendor/composer" />
       <path value="$PROJECT_DIR$/laracartel/vendor/psr/http-factory" />
+      <path value="$PROJECT_DIR$/laracartel/vendor/laravel/ui" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.3">
