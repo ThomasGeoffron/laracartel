@@ -30,7 +30,7 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('delete-users', function ($user) {
-            return $user->isAdmin();
+            return $user->hasPermission(['jefe']);
         });
 
         Gate::define('manage-users', function ($user) {
