@@ -48,4 +48,12 @@ class User extends Authenticatable
     public function roles() {
         return $this->belongsToMany('App\Models\Role');
     }
+
+    public function isAdmin() {
+        $this->roles()->where('name', 'jefe')->first();
+    }
+
+    public function hasPermission(array $roles) {
+        return $this->roles()->whereIn('name', $roles)->first();
+    }
 }
