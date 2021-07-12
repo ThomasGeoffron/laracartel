@@ -17,6 +17,19 @@
                     {{ __('Welcome ' . Auth::user()->name. ' !') }}
                 </div>
             </div>
+            @auth
+            <div class="card">
+                <div class="card-body">
+                    @can('manage-clients')
+                        <a href="{{ route('commercial.client.index') }}"><button class="btn btn-secondary btn-lg">Clients</button></a>
+                    @endcan
+                    @can('manage-users')
+                        <a href="{{ route('admin.users.index') }}"><button class="btn btn-secondary btn-lg">Utilisateurs</button></a>
+                    @endcan
+                </div>
+            </div>
+            @else
+            @endauth
         </div>
     </div>
 </div>

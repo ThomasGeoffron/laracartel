@@ -53,7 +53,7 @@ class Payment extends \Faker\Provider\Payment
         '256' => 'Nordea Bank Abp Spółka Akcyjna Oddział w Polsce',
         '258' => 'J.P. Morgan Europe Limited Spółka z ograniczoną odpowiedzialnością Oddział w Polsce',
         '260' => 'Bank of China (Luxembourg) S.A. Spółka Akcyjna Oddział w Polsce',
-        '262' => 'Industrial and Commercial Bank of China (Europe) S.A. (Spółka Akcyjna) Oddział w Polsce',
+        '262' => 'Industrial and commercial Bank of China (Europe) S.A. (Spółka Akcyjna) Oddział w Polsce',
         '264' => 'RCI Banque Spółka Akcyjna Oddział w Polsce',
         '265' => 'EUROCLEAR Bank SA/NV (Spółka Akcyjna) - Oddział w Polsce',
         '266' => 'Intesa Sanpaolo S.p.A. Spółka Akcyjna Oddział w Polsce',

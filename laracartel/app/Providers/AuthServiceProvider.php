@@ -37,5 +37,33 @@ class AuthServiceProvider extends ServiceProvider
             return $user->hasPermission(['jefe', 'encargado']);
         });
 
+        Gate::define('edit-client', function ($user) {
+            return $user->hasPermission(['jefe', 'encargado']);
+        });
+
+        Gate::define('delete-client', function ($user) {
+            return $user->hasPermission(['jefe', 'encargado']);
+        });
+
+        Gate::define('manage-clients', function ($user) {
+            return $user->hasPermission(['jefe', 'encargado']);
+        });
+
+        Gate::define('add-transport', function ($user) {
+            return $user->hasPermission(['jefe', 'encargado']);
+        });
+
+        Gate::define('edit-transport', function ($user) {
+            return $user->hasPermission(['jefe', 'encargado']);
+        });
+
+        Gate::define('delete-transport', function ($user) {
+            return $user->hasPermission(['jefe', 'encargado']);
+        });
+
+        Gate::define('manage-transports', function ($user) {
+            return $user->hasPermission(['jefe', 'encargado']);
+        });
+
     }
 }

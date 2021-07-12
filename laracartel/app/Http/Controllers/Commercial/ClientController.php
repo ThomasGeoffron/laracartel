@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Commercial;
 use App\Http\Controllers\Controller;
 use App\Models\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class ClientController extends Controller
 {
@@ -15,7 +16,9 @@ class ClientController extends Controller
      */
     public function index()
     {
-        //
+        $client = Client::all();
+
+        return view('commercial.client.index')->with('clients', $client);
     }
 
     /**
@@ -25,7 +28,7 @@ class ClientController extends Controller
      */
     public function create()
     {
-        //
+        return view('commercial.client.add');
     }
 
     /**
@@ -36,7 +39,9 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Client::create($request->all());
+
+        return redirect()->route('commercial.client.index');
     }
 
     /**
@@ -58,7 +63,13 @@ class ClientController extends Controller
      */
     public function edit(Client $client)
     {
-        //
+        if (Gate::denies('edit-client')) {
+            return redirect()->route('commercial.client.index');
+        }
+
+        return view('commercial.client.edit', [
+            'client' => $client
+        ]);
     }
 
     /**
@@ -70,7 +81,13 @@ class ClientController extends Controller
      */
     public function update(Request $request, Client $client)
     {
-        //
+        $client->nom = $request->nom;
+        $client->raisonsoc = $request->raisonsoc;
+        $client->siege = $request->siege;
+
+        $client->save();
+
+        return redirect()->route('commercial.client.index');
     }
 
     /**
@@ -81,6 +98,12 @@ class ClientController extends Controller
      */
     public function destroy(Client $client)
     {
-        //
+        if (Gate::denies('delete-users')) {
+            return redirect()->route('commercial.client.index');
+        }
+
+        $client->delete();
+
+        return redirect()->route('commercial.client.index');
     }
 }
