@@ -5,35 +5,38 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Liste des utilisateurs</div>
+                    <div class="card-header">
+                        Liste des transports
+                        <a href="{{ route('stocks.entrepot.create') }}"><button class="btn btn-success btn-sm float-right">+ Ajouter</button></a>
+                    </div>
 
                     <div class="card-body">
                         <table class="table">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Nom</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Rôles</th>
+                                    <th scope="col">Localisation</th>
+                                    <th scope="col">Capacité</th>
+                                    <th scope="col">Gérant</th>
                                     <th scope="col">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($users as $user)
+                                @foreach($entrepots as $entrepot)
                                     <tr>
-                                        <th scope="row">{{ $user->id }}</th>
-                                        <td>{{ $user->name }}</td>
-                                        <td>{{ $user->email }}</td>
-                                        <td>{{ implode(', ', $user->roles()->get()->pluck('name')->toArray()) }}</td>
+                                        <th scope="row">{{ $entrepot->id }}</th>
+                                        <td>{{ $entrepot->localisation }}</td>
+                                        <td>{{ $entrepot->capacite }}</td>
+                                        <td>{{ $entrepot->gerant()->get()->pluck('name')->first() }}</td>
                                         <td>
-                                            @can('edit-users')
-                                            <a href="{{ route('admin.users.edit', $user->id) }}"><button class="btn btn-warning">Modifier</button></a>
+                                            @can('edit-entrepot')
+                                            <a href="{{ route('stocks.entrepot.edit', $entrepot->id) }}"><button class="btn btn-warning">Modifier</button></a>
                                             @endcan
-                                            @can('delete-users')
-                                            <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" class="d-inline">
+                                            @can('delete-entrepot')
+                                            <form action="{{ route('stocks.entrepot.destroy', $entrepot->id) }}" method="POST" class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger">Suicider</button>
+                                                <button type="submit" class="btn btn-danger">Supprimer</button>
                                             </form>
                                             @endcan
                                         </td>

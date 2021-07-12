@@ -11,6 +11,12 @@ class Entrepot extends Model
 
     protected $table = "entrepot";
 
+    protected $fillable = [
+        'localisation',
+        'capacite',
+        'gerant'
+    ];
+
     public function gerant() {
         return $this->belongsTo(User::class, 'gerant');
     }

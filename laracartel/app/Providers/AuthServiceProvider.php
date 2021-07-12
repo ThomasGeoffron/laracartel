@@ -101,5 +101,21 @@ class AuthServiceProvider extends ServiceProvider
             return $user->hasPermission(['jefe', 'encargado', 'vigía', 'camello']);
         });
 
+        Gate::define('add-entrepot', function ($user) {
+            return $user->hasPermission(['jefe', 'encargado']);
+        });
+
+        Gate::define('edit-entrepot', function ($user) {
+            return $user->hasPermission(['jefe', 'encargado']);
+        });
+
+        Gate::define('delete-entrepot', function ($user) {
+            return $user->hasPermission(['jefe', 'encargado']);
+        });
+
+        Gate::define('manage-entrepots', function ($user) {
+            return $user->hasPermission(['jefe', 'encargado']);
+        });
+
     }
 }

@@ -82,6 +82,9 @@
                                     @can('manage-produits')
                                         <a href="{{ route('stocks.produit.index') }}" class="dropdown-item">Produits</a>
                                     @endcan
+                                    @can('manage-entrepots')
+                                        <a href="{{ route('stocks.entrepot.index') }}" class="dropdown-item">Entrepôts</a>
+                                    @endcan
                                 </div>
                             </li>
                         @endguest

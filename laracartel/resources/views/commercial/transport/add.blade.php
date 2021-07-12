@@ -15,6 +15,7 @@
                                 <label for="nom" class="col-md-6 col-form-label">{{ __('Transporteur') }}</label>
 
                                 <div class="col-md-12">
+                                    <label for="user">Transporteur</label>
                                     <select name="user" class="form-select">
                                         @foreach($users as $user)
                                             <option value="{{ $user->id }}">{{ $user->name }}</option>

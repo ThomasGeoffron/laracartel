@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Stocks;
 
 use App\Http\Controllers\Controller;
 use App\Models\Entrepot;
+use App\Models\Role;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class EntrepotController extends Controller
 {
@@ -15,7 +18,9 @@ class EntrepotController extends Controller
      */
     public function index()
     {
-        //
+        $entrepots = Entrepot::all();
+
+        return view('stocks.entrepot.index')->with('entrepots', $entrepots);
     }
 
     /**
@@ -25,7 +30,20 @@ class EntrepotController extends Controller
      */
     public function create()
     {
-        //
+        if (Gate::denies('add-entrepot')) {
+            return redirect()->route('stocks.entrepot.index');
+        }
+
+        $users = User::all();
+        $role = Role::all()->where('name', 'encargado')->first();
+        $gerants = [];
+        foreach ($users as $user) {
+            if ($user->roles->pluck('id')->contains($role->id)) {
+                $gerants[] = $user;
+            }
+        }
+
+        return view('stocks.entrepot.add')->with('users', $gerants);
     }
 
     /**
@@ -36,7 +54,9 @@ class EntrepotController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Entrepot::create($request->all());
+
+        return redirect()->route('stocks.entrepot.index');
     }
 
     /**
@@ -58,7 +78,23 @@ class EntrepotController extends Controller
      */
     public function edit(Entrepot $entrepot)
     {
-        //
+        if (Gate::denies('edit-entrepot')) {
+            return redirect()->route('commercial.transport.index');
+        }
+
+        $users = User::all();
+        $role = Role::all()->where('name', 'encargado')->first();
+        $gerants = [];
+        foreach ($users as $user) {
+            if ($user->roles->pluck('id')->contains($role->id)) {
+                $gerants[] = $user;
+            }
+        }
+
+        return view('stocks.entrepot.edit', [
+            'entrepot' => $entrepot,
+            'users' => $gerants
+        ]);
     }
 
     /**
@@ -70,7 +106,13 @@ class EntrepotController extends Controller
      */
     public function update(Request $request, Entrepot $entrepot)
     {
-        //
+        $entrepot->localisation = $request->localisation;
+        $entrepot->capacite = $request->capacite;
+        $entrepot->gerant = $request->gerant;
+
+        $entrepot->save();
+
+        return redirect()->route('stocks.entrepot.index');
     }
 
     /**
@@ -81,6 +123,12 @@ class EntrepotController extends Controller
      */
     public function destroy(Entrepot $entrepot)
     {
-        //
+        if (Gate::denies('delete-entrepot')) {
+            return redirect()->route('stocks.entrepot.index');
+        }
+
+        $entrepot->delete();
+
+        return redirect()->route('stocks.entrepot.index');
     }
 }
