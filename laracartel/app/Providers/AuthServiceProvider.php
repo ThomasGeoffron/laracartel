@@ -37,6 +37,10 @@ class AuthServiceProvider extends ServiceProvider
             return $user->hasPermission(['jefe', 'encargado']);
         });
 
+        Gate::define('add-client', function ($user) {
+            return $user->hasPermission(['jefe', 'encargado']);
+        });
+
         Gate::define('edit-client', function ($user) {
             return $user->hasPermission(['jefe', 'encargado']);
         });
@@ -50,11 +54,11 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('add-transport', function ($user) {
-            return $user->hasPermission(['jefe', 'encargado']);
+            return $user->hasPermission(['jefe', 'encargado', 'repartidor']);
         });
 
         Gate::define('edit-transport', function ($user) {
-            return $user->hasPermission(['jefe', 'encargado']);
+            return $user->hasPermission(['jefe', 'encargado', 'repartidor']);
         });
 
         Gate::define('delete-transport', function ($user) {
@@ -62,7 +66,39 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('manage-transports', function ($user) {
+            return $user->hasPermission(['jefe', 'encargado', 'repartidor']);
+        });
+
+        Gate::define('add-arme', function ($user) {
+            return $user->hasPermission(['jefe', 'encargado', 'vigía']);
+        });
+
+        Gate::define('edit-arme', function ($user) {
+            return $user->hasPermission(['jefe', 'encargado', 'vigía']);
+        });
+
+        Gate::define('delete-arme', function ($user) {
             return $user->hasPermission(['jefe', 'encargado']);
+        });
+
+        Gate::define('manage-armes', function ($user) {
+            return $user->hasPermission(['jefe', 'encargado', 'vigía']);
+        });
+
+        Gate::define('add-produit', function ($user) {
+            return $user->hasPermission(['jefe', 'encargado', 'vigía', 'camello']);
+        });
+
+        Gate::define('edit-produit', function ($user) {
+            return $user->hasPermission(['jefe', 'encargado', 'vigía', 'camello']);
+        });
+
+        Gate::define('delete-produit', function ($user) {
+            return $user->hasPermission(['jefe', 'encargado']);
+        });
+
+        Gate::define('manage-produits', function ($user) {
+            return $user->hasPermission(['jefe', 'encargado', 'vigía', 'camello']);
         });
 
     }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Stocks;
 use App\Http\Controllers\Controller;
 use App\Models\Produit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class ProduitController extends Controller
 {
@@ -15,7 +16,9 @@ class ProduitController extends Controller
      */
     public function index()
     {
-        //
+        $produits = Produit::all();
+
+        return view('stocks.produit.index')->with('produits', $produits);
     }
 
     /**
@@ -25,7 +28,10 @@ class ProduitController extends Controller
      */
     public function create()
     {
-        //
+        if (Gate::denies('add-produit')) {
+            return redirect()->route('stocks.produit.index');
+        }
+        return view('stocks.produit.add');
     }
 
     /**
@@ -36,16 +42,18 @@ class ProduitController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Produit::create($request->all());
+
+        return redirect()->route('stocks.produit.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Produit  $produit
+     * @param  \App\Models\produit  $produit
      * @return \Illuminate\Http\Response
      */
-    public function show(Produit $produit)
+    public function show(produit $produit)
     {
         //
     }
@@ -53,34 +61,52 @@ class ProduitController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Produit  $produit
+     * @param  \App\Models\produit  $produit
      * @return \Illuminate\Http\Response
      */
-    public function edit(Produit $produit)
+    public function edit(produit $produit)
     {
-        //
+        if (Gate::denies('edit-produit')) {
+            return redirect()->route('stocks.produit.index');
+        }
+
+        return view('stocks.produit.edit', [
+            'produit' => $produit
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Produit  $produit
+     * @param  \App\Models\produit  $produit
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Produit $produit)
+    public function update(Request $request, produit $produit)
     {
-        //
+        $produit->designation = $request->designation;
+        $produit->description = $request->description;
+        $produit->pu = $request->pu;
+
+        $produit->save();
+
+        return redirect()->route('stocks.produit.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Produit  $produit
+     * @param  \App\Models\produit  $produit
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Produit $produit)
+    public function destroy(produit $produit)
     {
-        //
+        if (Gate::denies('delete-produit')) {
+            return redirect()->route('stocks.produit.index');
+        }
+
+        $produit->delete();
+
+        return redirect()->route('stocks.produit.index');
     }
 }

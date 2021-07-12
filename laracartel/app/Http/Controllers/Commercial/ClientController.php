@@ -39,6 +39,9 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
+        if (Gate::denies('add-client')) {
+            return redirect()->route('commercial.client.index');
+        }
         Client::create($request->all());
 
         return redirect()->route('commercial.client.index');

@@ -5,35 +5,38 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Liste des utilisateurs</div>
+                    <div class="card-header">
+                        Liste des transports
+                        <a href="{{ route('stocks.produit.create') }}"><button class="btn btn-success btn-sm float-right">+ Ajouter</button></a>
+                    </div>
 
                     <div class="card-body">
                         <table class="table">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Nom</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Rôles</th>
+                                    <th scope="col">Designation</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">pu</th>
                                     <th scope="col">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($users as $user)
+                                @foreach($produits as $produit)
                                     <tr>
-                                        <th scope="row">{{ $user->id }}</th>
-                                        <td>{{ $user->name }}</td>
-                                        <td>{{ $user->email }}</td>
-                                        <td>{{ implode(', ', $user->roles()->get()->pluck('name')->toArray()) }}</td>
+                                        <th scope="row">{{ $produit->id }}</th>
+                                        <td>{{ $produit->designation }}</td>
+                                        <td>{{ $produit->description }}</td>
+                                        <td>{{ $produit->pu }}</td>
                                         <td>
-                                            @can('edit-users')
-                                            <a href="{{ route('admin.users.edit', $user->id) }}"><button class="btn btn-warning">Modifier</button></a>
+                                            @can('edit-produit')
+                                            <a href="{{ route('stocks.produit.edit', $produit->id) }}"><button class="btn btn-warning">Modifier</button></a>
                                             @endcan
-                                            @can('delete-users')
-                                            <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" class="d-inline">
+                                            @can('delete-produit')
+                                            <form action="{{ route('stocks.produit.destroy', $produit->id) }}" method="POST" class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger">Suicider</button>
+                                                <button type="submit" class="btn btn-danger">Supprimer</button>
                                             </form>
                                             @endcan
                                         </td>

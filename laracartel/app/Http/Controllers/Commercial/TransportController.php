@@ -30,6 +30,9 @@ class TransportController extends Controller
      */
     public function create()
     {
+        if (Gate::denies('add-transport')) {
+            return redirect()->route('commercial.transport.index');
+        }
         $users = User::all();
         $role = Role::all()->where('name', 'repartidor')->first();
         $transporteurs = [];

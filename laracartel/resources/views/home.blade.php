@@ -29,6 +29,12 @@
                     @can('manage-transports')
                         <a href="{{ route('commercial.transport.index') }}"><button class="btn btn-secondary btn-lg">Transports</button></a>
                     @endcan
+                    @can('manage-armes')
+                        <a href="{{ route('stocks.arme.index') }}"><button class="btn btn-secondary btn-lg">Armes</button></a>
+                    @endcan
+                    @can('manage-produits')
+                        <a href="{{ route('stocks.produit.index') }}"><button class="btn btn-secondary btn-lg">Produits</button></a>
+                    @endcan
                 </div>
             </div>
             @else

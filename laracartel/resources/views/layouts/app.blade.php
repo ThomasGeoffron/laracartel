@@ -67,8 +67,20 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
+                                    @can('manage-clients')
+                                        <a href="{{ route('commercial.client.index') }}" class="dropdown-item">Clients</a>
+                                    @endcan
                                     @can('manage-users')
-                                    <a href="{{route('admin.users.index')}}" class="dropdown-item">Liste des utilisateurs</a>
+                                        <a href="{{ route('admin.users.index') }}" class="dropdown-item">Utilisateurs</a>
+                                    @endcan
+                                    @can('manage-transports')
+                                        <a href="{{ route('commercial.transport.index') }}" class="dropdown-item">Transports</a>
+                                    @endcan
+                                    @can('manage-armes')
+                                        <a href="{{ route('stocks.arme.index') }}" class="dropdown-item">Armes</a>
+                                    @endcan
+                                    @can('manage-produits')
+                                        <a href="{{ route('stocks.produit.index') }}" class="dropdown-item">Produits</a>
                                     @endcan
                                 </div>
                             </li>
