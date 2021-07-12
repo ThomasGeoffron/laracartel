@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Commercial;
 
 use App\Http\Controllers\Controller;
+use App\Models\Role;
 use App\Models\Transport;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class TransportController extends Controller
 {
@@ -15,7 +18,9 @@ class TransportController extends Controller
      */
     public function index()
     {
-        //
+        $transports = Transport::all();
+
+        return view('commercial.transport.index')->with('transports', $transports);
     }
 
     /**
@@ -25,7 +30,16 @@ class TransportController extends Controller
      */
     public function create()
     {
-        //
+        $users = User::all();
+        $role = Role::all()->where('name', 'repartidor')->first();
+        $transporteurs = [];
+        foreach ($users as $user) {
+            if ($user->roles->pluck('id')->contains($role->id)) {
+                $transporteurs[] = $user;
+            }
+        }
+
+        return view('commercial.transport.add')->with('users', $transporteurs);
     }
 
     /**
@@ -36,7 +50,9 @@ class TransportController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Transport::create($request->all());
+
+        return redirect()->route('commercial.transport.index');
     }
 
     /**
@@ -58,7 +74,23 @@ class TransportController extends Controller
      */
     public function edit(Transport $transport)
     {
-        //
+        if (Gate::denies('edit-transport')) {
+            return redirect()->route('commercial.transport.index');
+        }
+
+        $users = User::all();
+        $role = Role::all()->where('name', 'repartidor')->first();
+        $transporteurs = [];
+        foreach ($users as $user) {
+            if ($user->roles->pluck('id')->contains($role->id)) {
+                $transporteurs[] = $user;
+            }
+        }
+
+        return view('commercial.transport.edit', [
+            'transport' => $transport,
+            'users' => $transporteurs
+        ]);
     }
 
     /**
@@ -70,7 +102,14 @@ class TransportController extends Controller
      */
     public function update(Request $request, Transport $transport)
     {
-        //
+        $transport->user = $request->user;
+        $transport->vehicule = $request->vehicule;
+        $transport->depart = $request->depart;
+        $transport->destination = $request->destination;
+
+        $transport->save();
+
+        return redirect()->route('commercial.transport.index');
     }
 
     /**
@@ -81,6 +120,12 @@ class TransportController extends Controller
      */
     public function destroy(Transport $transport)
     {
-        //
+        if (Gate::denies('delete-transport')) {
+            return redirect()->route('commercial.transport.index');
+        }
+
+        $transport->delete();
+
+        return redirect()->route('commercial.transport.index');
     }
 }

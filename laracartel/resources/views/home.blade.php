@@ -26,6 +26,9 @@
                     @can('manage-users')
                         <a href="{{ route('admin.users.index') }}"><button class="btn btn-secondary btn-lg">Utilisateurs</button></a>
                     @endcan
+                    @can('manage-transports')
+                        <a href="{{ route('commercial.transport.index') }}"><button class="btn btn-secondary btn-lg">Transports</button></a>
+                    @endcan
                 </div>
             </div>
             @else

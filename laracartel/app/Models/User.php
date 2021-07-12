@@ -56,4 +56,8 @@ class User extends Authenticatable
     public function hasPermission(array $roles) {
         return $this->roles()->whereIn('name', $roles)->first();
     }
+
+    public function isTransport() {
+        return $this->roles()->whereIn('name', 'repartidor');
+    }
 }

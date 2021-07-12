@@ -6,7 +6,7 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">
-                        Liste des utilisateurs
+                        Liste des clients
                         <a href="{{ route('commercial.client.create') }}"><button class="btn btn-success btn-sm float-right">+ Ajouter</button></a>
                     </div>
 

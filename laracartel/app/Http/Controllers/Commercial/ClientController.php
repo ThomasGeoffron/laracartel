@@ -98,7 +98,7 @@ class ClientController extends Controller
      */
     public function destroy(Client $client)
     {
-        if (Gate::denies('delete-users')) {
+        if (Gate::denies('delete-client')) {
             return redirect()->route('commercial.client.index');
         }
 

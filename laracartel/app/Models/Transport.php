@@ -10,6 +10,13 @@ class Transport extends Model
     use HasFactory;
 
 
+    protected $fillable = [
+        'user',
+        'vehicule',
+        'depart',
+        'destination'
+    ];
+
     protected $table = "transport";
 
     public function user() {
