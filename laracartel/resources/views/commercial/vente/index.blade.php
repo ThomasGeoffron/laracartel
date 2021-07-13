@@ -5,35 +5,50 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Liste des utilisateurs</div>
+                    <div class="card-header">
+                        Liste des ventes
+                        <a href="{{ route('commercial.vente.create') }}"><button class="btn btn-success btn-sm float-right">+ Ajouter</button></a>
+                    </div>
 
                     <div class="card-body">
                         <table class="table">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Nom</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Rôles</th>
+                                    <th scope="col">Stock</th>
+                                    <th scope="col">Transport</th>
+                                    <th scope="col">Client</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Quantité</th>
                                     <th scope="col">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($users as $user)
+                                @foreach($ventes as $vente)
                                     <tr>
-                                        <th scope="row">{{ $user->id }}</th>
-                                        <td>{{ $user->name }}</td>
-                                        <td>{{ $user->email }}</td>
-                                        <td>{{ implode(', ', $user->roles()->get()->pluck('name')->toArray()) }}</td>
+                                        <th scope="row">{{ $vente->id }}</th>
                                         <td>
-                                            @can('edit-users')
-                                            <a href="{{ route('admin.users.edit', $user->id) }}"><button class="btn btn-warning">Modifier</button></a>
+                                            {{ $vente->stock()->get()->first()->entrepot()->get()->pluck('localisation')->first() }},
+                                            {{ $vente->stock()->get()->first()->arme()->get()->pluck('designation')->first() ??
+                                               $vente->stock()->get()->first()->produit()->get()->pluck('designation')->first() }}
+                                        </td>
+                                        <td>
+                                            {{ $vente->transport()->get()->first()->user()->get()->pluck('name')->first() }},
+                                            {{ $vente->transport()->get()->pluck('vehicule')->first() }},
+                                            {{ $vente->transport()->get()->pluck('destination')->first() }}
+                                        </td>
+                                        <td>{{ $vente->client()->get()->pluck('nom')->first() }}</td>
+                                        <td>{{ $vente->date }}</td>
+                                        <td>{{ $vente->qte }}</td>
+                                        <td>
+                                            @can('edit-vente')
+                                            <a href="{{ route('commercial.vente.edit', $vente->id) }}"><button class="btn btn-warning">Modifier</button></a>
                                             @endcan
-                                            @can('delete-users')
-                                            <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" class="d-inline">
+                                            @can('delete-vente')
+                                            <form action="{{ route('commercial.vente.destroy', $vente->id) }}" method="POST" class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger">Suicider</button>
+                                                <button type="submit" class="btn btn-danger">Supprimer</button>
                                             </form>
                                             @endcan
                                         </td>

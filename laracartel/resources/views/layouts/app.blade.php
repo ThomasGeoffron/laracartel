@@ -59,15 +59,6 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
                                     @can('manage-clients')
                                         <a href="{{ route('commercial.client.index') }}" class="dropdown-item">Clients</a>
                                     @endcan
@@ -89,6 +80,21 @@
                                     @can('manage-stocks')
                                         <a href="{{ route('stocks.stock.index') }}" class="dropdown-item">Stocks</a>
                                     @endcan
+                                    @can('manage-ventes')
+                                        <a href="{{ route('commercial.vente.index') }}" class="dropdown-item">Ventes</a>
+                                    @endcan
+
+                                        <hr>
+
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                           onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                            {{ __('Logout') }}
+                                        </a>
+
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                            @csrf
+                                        </form>
                                 </div>
                             </li>
                         @endguest

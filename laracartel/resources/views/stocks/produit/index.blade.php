@@ -6,7 +6,7 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">
-                        Liste des transports
+                        Liste des produits
                         <a href="{{ route('stocks.produit.create') }}"><button class="btn btn-success btn-sm float-right">+ Ajouter</button></a>
                     </div>
 

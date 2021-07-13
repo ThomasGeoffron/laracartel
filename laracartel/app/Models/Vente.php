@@ -10,6 +10,13 @@ class Vente extends Model
     use HasFactory;
 
     protected $table = "vente";
+    protected $fillable = [
+        'stock',
+        'transport',
+        'client',
+        'date',
+        'qte'
+    ];
 
     public function stock() {
         return $this->belongsTo(Stock::class, 'stock');

@@ -6,7 +6,7 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">
-                        Stocks
+                        Liste des stocks
                         <a href="{{ route('stocks.stock.create') }}"><button class="btn btn-success btn-sm float-right">+ Ajouter</button></a>
                     </div>
 
