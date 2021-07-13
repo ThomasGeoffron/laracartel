@@ -117,5 +117,21 @@ class AuthServiceProvider extends ServiceProvider
             return $user->hasPermission(['jefe', 'encargado']);
         });
 
+        Gate::define('add-stock', function ($user) {
+            return $user->hasPermission(['jefe', 'encargado', 'vigía']);
+        });
+
+        Gate::define('edit-stock', function ($user) {
+            return $user->hasPermission(['jefe', 'encargado', 'vigía']);
+        });
+
+        Gate::define('delete-stock', function ($user) {
+            return $user->hasPermission(['jefe', 'encargado', 'vigía']);
+        });
+
+        Gate::define('manage-stocks', function ($user) {
+            return $user->hasPermission(['jefe', 'encargado', 'vigía']);
+        });
+
     }
 }

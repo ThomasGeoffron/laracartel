@@ -38,7 +38,7 @@
                                 </div>
                             </div>
                             <div class="col-md-12">
-                                <label for="gerant">Gérant</label>
+                                <label for="gerant" class="col-md-6 col-form-label">Gérant</label>
                                 <select name="gerant" class="form-select">
                                     @foreach($users as $user)
                                         <option value="{{ $user->id }}" @if($user->id === $entrepot->user) selected @endif>{{ $user->name }}</option>

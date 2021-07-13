@@ -38,6 +38,9 @@
                     @can('manage-entrepots')
                         <a href="{{ route('stocks.entrepot.index') }}"><button class="btn btn-secondary btn-lg">Entrepôts</button></a>
                     @endcan
+                    @can('manage-stocks')
+                        <a href="{{ route('stocks.stock.index') }}"><button class="btn btn-secondary btn-lg">Stocks</button></a>
+                    @endcan
                 </div>
             </div>
             @else

@@ -12,10 +12,8 @@
                             @csrf
                             @method('PATCH')
                             <div class="form-group row">
-                                <label for="nom" class="col-md-6 col-form-label">{{ __('Transporteur') }}</label>
-
                                 <div class="col-md-12">
-                                    <label for="user">Transporteur</label>
+                                    <label for="user" class="col-md-6 col-form-label">Transporteur</label>
                                     <select name="user" class="form-select">
                                         @foreach($users as $user)
                                             <option value="{{ $user->id }}" @if($user->id === $transport->user) selected @endif>{{ $user->name }}</option>

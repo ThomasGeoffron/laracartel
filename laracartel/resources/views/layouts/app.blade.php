@@ -10,7 +10,8 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/stocks.js') }}"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -84,6 +85,9 @@
                                     @endcan
                                     @can('manage-entrepots')
                                         <a href="{{ route('stocks.entrepot.index') }}" class="dropdown-item">Entrepôts</a>
+                                    @endcan
+                                    @can('manage-stocks')
+                                        <a href="{{ route('stocks.stock.index') }}" class="dropdown-item">Stocks</a>
                                     @endcan
                                 </div>
                             </li>

@@ -11,6 +11,13 @@ class Stock extends Model
 
     protected $table = "stock";
 
+    protected $fillable = [
+        'entrepot',
+        'arme',
+        'produit',
+        'qte'
+    ];
+
     public function produit() {
         return $this->belongsTo(Produit::class, 'produit');
     }

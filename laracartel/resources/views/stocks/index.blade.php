@@ -5,35 +5,45 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Liste des utilisateurs</div>
+                    <div class="card-header">
+                        Stocks
+                        <a href="{{ route('stocks.stock.create') }}"><button class="btn btn-success btn-sm float-right">+ Ajouter</button></a>
+                    </div>
 
                     <div class="card-body">
                         <table class="table">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Nom</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Rôles</th>
+                                    <th scope="col">Entrepôt</th>
+                                    <th scope="col">Type</th>
+                                    <th scope="col">Désignation</th>
+                                    <th scope="col">Quantité</th>
                                     <th scope="col">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($users as $user)
+                                @foreach($stocks as $stock)
                                     <tr>
-                                        <th scope="row">{{ $user->id }}</th>
-                                        <td>{{ $user->name }}</td>
-                                        <td>{{ $user->email }}</td>
-                                        <td>{{ implode(', ', $user->roles()->get()->pluck('name')->toArray()) }}</td>
+                                        <th scope="row">{{ $stock->id }}</th>
+                                        <td>{{ $stock->entrepot()->get()->pluck('localisation')->first() }}</td>
+                                        @if($stock->arme != null)
+                                            <td>Arme</td>
+                                            <td>{{ $stock->arme()->get()->pluck('designation')->first() }}</td>
+                                        @else
+                                            <td>Produit</td>
+                                            <td>{{ $stock->produit()->get()->pluck('designation')->first() }}</td>
+                                        @endif
+                                        <td>{{ $stock->qte }}</td>
                                         <td>
-                                            @can('edit-users')
-                                            <a href="{{ route('admin.users.edit', $user->id) }}"><button class="btn btn-warning">Modifier</button></a>
+                                            @can('edit-stock')
+                                            <a href="{{ route('stocks.stock.edit', $stock->id) }}"><button class="btn btn-warning">Modifier</button></a>
                                             @endcan
-                                            @can('delete-users')
-                                            <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" class="d-inline">
+                                            @can('delete-stock')
+                                            <form action="{{ route('stocks.stock.destroy', $stock->id) }}" method="POST" class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger">Suicider</button>
+                                                <button type="submit" class="btn btn-danger">Supprimer</button>
                                             </form>
                                             @endcan
                                         </td>

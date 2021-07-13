@@ -25,7 +25,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="capacite" class="col-md-6 col-form-label">{{ __('Adresse E-Mail ') }}</label>
+                                <label for="capacite" class="col-md-6 col-form-label">{{ __('Capacité ') }}</label>
 
                                 <div class="col-md-12">
                                     <input id="capacite" type="number" class="form-control @error('capacite') is-invalid @enderror" name="capacite" value="{{ old('capacite') }}" required autocomplete="capacite" autofocus>
@@ -38,7 +38,7 @@
                                 </div>
                             </div>
                             <div class="col-md-12">
-                                <label for="gerant">Gérant</label>
+                                <label for="gerant" class="col-md-6 col-form-label">Gérant</label>
                                 <select name="gerant" class="form-select">
                                     @foreach($users as $user)
                                         <option value="{{ $user->id }}">{{ $user->name }}</option>

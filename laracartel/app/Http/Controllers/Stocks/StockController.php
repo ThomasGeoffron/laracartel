@@ -3,11 +3,18 @@
 namespace App\Http\Controllers\Stocks;
 
 use App\Http\Controllers\Controller;
+use App\Models\Arme;
+use App\Models\Entrepot;
+use App\Models\Produit;
 use App\Models\Stock;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class StockController extends Controller
 {
+    public function __construct() {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +22,9 @@ class StockController extends Controller
      */
     public function index()
     {
-        //
+        $stocks = Stock::all();
+
+        return view('stocks.index')->with('stocks', $stocks);
     }
 
     /**
@@ -25,7 +34,15 @@ class StockController extends Controller
      */
     public function create()
     {
-        //
+        $entrepots = Entrepot::all();
+        $armes = Arme::all();
+        $produits = Produit::all();
+
+        return view('stocks.add', [
+            'entrepots' => $entrepots,
+            'armes' => $armes,
+            'produits' => $produits
+        ]);
     }
 
     /**
@@ -36,7 +53,14 @@ class StockController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Stock::create([
+            'entrepot' => $request->entrepot,
+            'arme' => $request->arme != "default" ? $request->arme : null,
+            'produit' => $request->produit != "default" ? $request->produit : null,
+            'qte' => $request->qte
+        ]);
+
+        return redirect()->route('stocks.stock.index');
     }
 
     /**
@@ -58,7 +82,16 @@ class StockController extends Controller
      */
     public function edit(Stock $stock)
     {
-        //
+        $entrepots = Entrepot::all();
+        $armes = Arme::all();
+        $produits = Produit::all();
+
+        return view('stocks.edit', [
+            'stock' => $stock,
+            'entrepots' => $entrepots,
+            'armes' => $armes,
+            'produits' => $produits
+        ]);
     }
 
     /**
@@ -70,7 +103,14 @@ class StockController extends Controller
      */
     public function update(Request $request, Stock $stock)
     {
-        //
+        $stock->entrepot = $request->entrepot;
+        $stock->arme = $request->arme != "default" ? $request->arme : null;
+        $stock->produit = $request->produit != "default" ? $request->produit : null;
+        $stock->qte = $request->qte;
+
+        $stock->save();
+
+        return redirect()->route('stocks.stock.index');
     }
 
     /**
@@ -81,6 +121,12 @@ class StockController extends Controller
      */
     public function destroy(Stock $stock)
     {
-        //
+        if (Gate::denies('delete-produit')) {
+            return redirect()->route('stocks.stock.index');
+        }
+
+        $stock->delete();
+
+        return redirect()->route('stocks.stock.index');
     }
 }
