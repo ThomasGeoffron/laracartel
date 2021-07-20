@@ -47,7 +47,7 @@ class ArmeController extends Controller
     {
         Arme::create($request->all());
 
-        return redirect()->route('stocks.arme.index');
+        return redirect()->route('stocks.arme.index')->with('success', 'Nouvelle arme disponible !');
     }
 
     /**
@@ -93,7 +93,7 @@ class ArmeController extends Controller
 
         $arme->save();
 
-        return redirect()->route('stocks.arme.index');
+        return redirect()->route('stocks.arme.index')->with('success', 'Arme modifiée avec succès !');
     }
 
     /**
@@ -110,6 +110,6 @@ class ArmeController extends Controller
 
         $arme->delete();
 
-        return redirect()->route('stocks.arme.index');
+        return redirect()->route('stocks.arme.index')->with('success', 'On a viré la pétoire');
     }
 }

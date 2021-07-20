@@ -64,9 +64,9 @@ class VenteController extends Controller
             $stock->qte -= $request->qte;
             $stock->save();
         } else {
-            return Redirect::back()->withErrors(['msg', 'La quantité saisie est supérieure à celle disponible']);
+            return Redirect::back()->withErrors('La quantité saisie est supérieure à celle disponible');
         }
-        return redirect()->route('commercial.vente.index');
+        return redirect()->route('commercial.vente.index')->with('success', 'La vente a été créée avec succès !');
     }
 
     /**
@@ -117,18 +117,19 @@ class VenteController extends Controller
         $stockModif = Stock::all()->where('id', $request->stock)->first();
         $stockInit = Stock::all()->where('id', $vente->stock)->first();
         if ($request->qte > $vente->qte && $request->stock == $vente->stock) {
-            if (($stockModif->qte - $request->qte) >= 0 && $request->qte > 0) {
-                $stockModif->qte -= $request->qte;
+            $newQte = $request->qte - $vente->qte;
+            if ((($stockModif->qte - $newQte) >= 0) && $request->qte > 0) {
+                $stockModif->qte -= $newQte;
                 $stockModif->save();
             } else {
-                return Redirect::back()->withErrors(['msg', 'La quantité saisie est supérieure à celle disponible']);
+                return Redirect::back()->withErrors('La quantité saisie est supérieure à celle disponible' . ($stockModif->qte - $request->qte));
             }
         } elseif ($request->qte <= $vente->qte && $request->stock == $vente->stock) {
             if ($request->qte > 0) {
                 $stockModif->qte += ($vente->qte - $request->qte);
                 $stockModif->save();
             } else {
-                return Redirect::back()->withErrors(['msg', 'Veuillez saisir une quantité supérieure à 0']);
+                return Redirect::back()->withErrors('Veuillez saisir une quantité supérieure à 0');
             }
         } else {
             $stockInit->qte += $vente->qte;
@@ -137,7 +138,7 @@ class VenteController extends Controller
                 $stockModif->qte -= $request->qte;
                 $stockModif->save();
             } else {
-                return Redirect::back()->withErrors(['msg', 'La quantité saisie est supérieure à celle disponible']);
+                return Redirect::back()->withErrors('La quantité saisie est supérieure à celle disponible');
             }
         }
 
@@ -149,7 +150,7 @@ class VenteController extends Controller
 
         $vente->save();
 
-        return redirect()->route('commercial.vente.index');
+        return redirect()->route('commercial.vente.index')->with('success', 'La vente a été modifiée avec succès !');
     }
 
     /**
@@ -166,6 +167,6 @@ class VenteController extends Controller
 
         $vente->delete();
 
-        return redirect()->route('commercial.vente.index');
+        return redirect()->route('commercial.vente.index')->with('success', 'La vente a été supprimée avec succès !');
     }
 }

@@ -47,7 +47,7 @@ class ProduitController extends Controller
     {
         Produit::create($request->all());
 
-        return redirect()->route('stocks.produit.index');
+        return redirect()->route('stocks.produit.index')->with('success', 'Nouveau produit !');
     }
 
     /**
@@ -93,7 +93,7 @@ class ProduitController extends Controller
 
         $produit->save();
 
-        return redirect()->route('stocks.produit.index');
+        return redirect()->route('stocks.produit.index')->with('success', 'On a modifié la formule !');
     }
 
     /**
@@ -110,6 +110,6 @@ class ProduitController extends Controller
 
         $produit->delete();
 
-        return redirect()->route('stocks.produit.index');
+        return redirect()->route('stocks.produit.index')->with('success', 'Produit supprimé avec succès !');
     }
 }

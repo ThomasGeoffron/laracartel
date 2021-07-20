@@ -47,7 +47,7 @@ class ClientController extends Controller
         }
         Client::create($request->all());
 
-        return redirect()->route('commercial.client.index');
+        return redirect()->route('commercial.client.index')->with('success', 'Un nouveau client ! La PA$$ION !');
     }
 
     /**
@@ -93,7 +93,7 @@ class ClientController extends Controller
 
         $client->save();
 
-        return redirect()->route('commercial.client.index');
+        return redirect()->route('commercial.client.index')->with('success', 'Les informations du client ont été modifiés avec succès !');
     }
 
     /**
@@ -110,6 +110,6 @@ class ClientController extends Controller
 
         $client->delete();
 
-        return redirect()->route('commercial.client.index');
+        return redirect()->route('commercial.client.index')->with('success', 'Au revoir la PA$$ION :(');
     }
 }

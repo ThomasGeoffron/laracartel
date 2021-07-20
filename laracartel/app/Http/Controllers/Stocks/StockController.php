@@ -60,7 +60,7 @@ class StockController extends Controller
             'qte' => $request->qte
         ]);
 
-        return redirect()->route('stocks.stock.index');
+        return redirect()->route('stocks.stock.index')->with('success', 'Toujours plus de stock !');
     }
 
     /**
@@ -110,7 +110,7 @@ class StockController extends Controller
 
         $stock->save();
 
-        return redirect()->route('stocks.stock.index');
+        return redirect()->route('stocks.stock.index')->with('success', 'Stock réajusté !');
     }
 
     /**
@@ -127,6 +127,6 @@ class StockController extends Controller
 
         $stock->delete();
 
-        return redirect()->route('stocks.stock.index');
+        return redirect()->route('stocks.stock.index')->with('success', 'Stock supprimé avec succès !');
     }
 }

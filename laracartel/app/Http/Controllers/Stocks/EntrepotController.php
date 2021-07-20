@@ -59,7 +59,7 @@ class EntrepotController extends Controller
     {
         Entrepot::create($request->all());
 
-        return redirect()->route('stocks.entrepot.index');
+        return redirect()->route('stocks.entrepot.index')->with('success', 'Nouvel entrepôt !');
     }
 
     /**
@@ -115,7 +115,7 @@ class EntrepotController extends Controller
 
         $entrepot->save();
 
-        return redirect()->route('stocks.entrepot.index');
+        return redirect()->route('stocks.entrepot.index')->with('success', 'Les informations de l\'entrepôt on été modifiés avec succès !');
     }
 
     /**
@@ -132,6 +132,6 @@ class EntrepotController extends Controller
 
         $entrepot->delete();
 
-        return redirect()->route('stocks.entrepot.index');
+        return redirect()->route('stocks.entrepot.index')->with('success', 'Fallait pas mettre le cendrier à côté des barils d\'essence');
     }
 }

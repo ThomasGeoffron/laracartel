@@ -58,7 +58,7 @@ class TransportController extends Controller
     {
         Transport::create($request->all());
 
-        return redirect()->route('commercial.transport.index');
+        return redirect()->route('commercial.transport.index')->with('success', 'Nouveau transport disponible !');
     }
 
     /**
@@ -115,7 +115,7 @@ class TransportController extends Controller
 
         $transport->save();
 
-        return redirect()->route('commercial.transport.index');
+        return redirect()->route('commercial.transport.index')->with('success', 'Les informations du transport ont été modifiés avec succès !');
     }
 
     /**
@@ -132,6 +132,6 @@ class TransportController extends Controller
 
         $transport->delete();
 
-        return redirect()->route('commercial.transport.index');
+        return redirect()->route('commercial.transport.index')->with('success', 'Le véhicule a foncé dans le platane.');
     }
 }

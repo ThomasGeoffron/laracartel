@@ -92,7 +92,7 @@ class UsersController extends Controller
 
         $user->save();
 
-        return redirect()->route('admin.users.index');
+        return redirect()->route('admin.users.index')->with('success', 'L\'utilisateur a été modifié avec succès !');
     }
 
     /**
@@ -109,6 +109,6 @@ class UsersController extends Controller
         $user->roles()->detach();
         $user->delete();
 
-        return redirect()->route('admin.users.index');
+        return redirect()->route('admin.users.index')->with('success', 'L\'utilisateur a été suicidé de 2 balles dans le dos.');
     }
 }
