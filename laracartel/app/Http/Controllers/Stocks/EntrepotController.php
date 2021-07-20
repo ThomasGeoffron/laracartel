@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Stocks;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\EntrepotRequest;
 use App\Models\Entrepot;
 use App\Models\Role;
 use App\Models\User;
@@ -52,10 +53,10 @@ class EntrepotController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\EntrepotRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EntrepotRequest $request)
     {
         Entrepot::create($request->all());
 
@@ -103,11 +104,11 @@ class EntrepotController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\EntrepotRequest  $request
      * @param  \App\Models\Entrepot  $entrepot
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Entrepot $entrepot)
+    public function update(EntrepotRequest $request, Entrepot $entrepot)
     {
         $entrepot->localisation = $request->localisation;
         $entrepot->capacite = $request->capacite;

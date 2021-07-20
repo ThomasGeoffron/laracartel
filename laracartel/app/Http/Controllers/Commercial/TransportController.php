@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Commercial;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\TransportRequest;
 use App\Models\Role;
 use App\Models\Transport;
 use App\Models\User;
@@ -51,10 +52,10 @@ class TransportController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\TransportRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TransportRequest $request)
     {
         Transport::create($request->all());
 
@@ -102,11 +103,11 @@ class TransportController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\TransportRequest $request
      * @param  \App\Models\Transport  $transport
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Transport $transport)
+    public function update(TransportRequest $request, Transport $transport)
     {
         $transport->user = $request->user;
         $transport->vehicule = $request->vehicule;

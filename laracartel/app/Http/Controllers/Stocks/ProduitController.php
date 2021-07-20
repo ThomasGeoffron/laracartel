@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Stocks;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProduitRequest;
 use App\Models\Produit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -40,10 +41,10 @@ class ProduitController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\ProduitRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProduitRequest $request)
     {
         Produit::create($request->all());
 
@@ -81,11 +82,11 @@ class ProduitController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\ProduitRequest  $request
      * @param  \App\Models\produit  $produit
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, produit $produit)
+    public function update(ProduitRequest $request, produit $produit)
     {
         $produit->designation = $request->designation;
         $produit->description = $request->description;

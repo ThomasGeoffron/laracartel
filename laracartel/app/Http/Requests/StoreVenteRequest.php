@@ -13,7 +13,7 @@ class StoreVenteRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,10 @@ class StoreVenteRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'stock' => 'required|exists:stock,id',
+            'transport' => 'required|exists:transport,id',
+            'client' => 'required|exists:client,id',
+            'qte' => 'required|min:1|max:'
         ];
     }
 }

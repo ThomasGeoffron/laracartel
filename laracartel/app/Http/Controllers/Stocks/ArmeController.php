@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Stocks;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ArmeRequest;
 use App\Models\Arme;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -40,10 +41,10 @@ class ArmeController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\ArmeRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ArmeRequest $request)
     {
         Arme::create($request->all());
 
@@ -81,11 +82,11 @@ class ArmeController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\ArmeRequest  $request
      * @param  \App\Models\Arme  $arme
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Arme $arme)
+    public function update(ArmeRequest $request, Arme $arme)
     {
         $arme->designation = $request->designation;
         $arme->description = $request->description;
