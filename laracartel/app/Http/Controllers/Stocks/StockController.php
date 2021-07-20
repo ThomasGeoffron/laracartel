@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Stocks;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StockRequest;
 use App\Models\Arme;
 use App\Models\Entrepot;
 use App\Models\Produit;
 use App\Models\Stock;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Redirect;
 
 class StockController extends Controller
 {
@@ -48,11 +50,20 @@ class StockController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StockRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StockRequest $request)
     {
+        $entrepot = Entrepot::all()->where('id', $request->entrepot)->first();
+        $stockTotal = 0;
+        foreach ($entrepot->stocks() as $oneStock) {
+            $stockTotal += $oneStock->qte;
+        }
+        $stockTotal += $request->qte;
+        if ($stockTotal > $entrepot->capacite) {
+            return Redirect::back()->with('error', 'La quantité saisie est supérieure à celle disponible');
+        }
         Stock::create([
             'entrepot' => $request->entrepot,
             'arme' => $request->arme != "default" ? $request->arme : null,
@@ -97,12 +108,21 @@ class StockController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StockRequest  $request
      * @param  \App\Models\Stock  $stock
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Stock $stock)
+    public function update(StockRequest $request, Stock $stock)
     {
+        $entrepot = Entrepot::all()->where('id', $request->entrepot)->first();
+        $stockTotal = 0;
+        foreach ($entrepot->stocks() as $oneStock) {
+            $stockTotal += $oneStock->qte;
+        }
+        $stockTotal += $request->qte;
+        if ($stockTotal > $entrepot->capacite) {
+            return Redirect::back()->with('error', 'La quantité saisie est supérieure à celle disponible');
+        }
         $stock->entrepot = $request->entrepot;
         $stock->arme = $request->arme != "default" ? $request->arme : null;
         $stock->produit = $request->produit != "default" ? $request->produit : null;

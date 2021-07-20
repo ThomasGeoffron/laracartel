@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Entrepot;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StockRequest extends FormRequest
@@ -13,7 +14,7 @@ class StockRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +25,8 @@ class StockRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'entrepot' => 'required|exists:entrepot,id',
+            'qte' => 'required|integer|min:1'
         ];
     }
 }

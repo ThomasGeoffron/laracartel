@@ -30,11 +30,11 @@
                             </div>
 
                             <div class="form-group form-check">
-                                <input class="form-check-input" type="radio" name="typeRadio" id="armeRadio" value="arme" @if($stock->arme()->pluck('id')->toArray() != null) checked @endif>
+                                <input class="form-check-input" type="radio" name="typeRadio" id="armeRadio" value="arme" @if($stock->arme()->pluck('id')->first() != null) checked @endif>
                                 <label class="form-check-label" for="armeRadio">Arme</label>
                             </div>
                             <div class="form-group form-check">
-                                <input class="form-check-input" type="radio" name="typeRadio" id="produitRadio" value="produit" @if($stock->produit()->pluck('id')->toArray() != null) checked @endif>
+                                <input class="form-check-input" type="radio" name="typeRadio" id="produitRadio" value="produit" @if($stock->produit()->pluck('id')->first() != null) checked @endif>
                                 <label class="form-check-label" for="produitRadio">Produit</label>
                             </div>
                             <div class="form-group row" id="armeDiv">

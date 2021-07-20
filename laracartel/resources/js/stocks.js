@@ -1,8 +1,10 @@
 $(document).ready(function () {
     if ($('#armeRadio').is(':checked')) {
+        $('#armeDiv').show();
         $('#produitDiv').hide();
         $('#produitDiv option[value="default"]').prop('selected', true);
     } else {
+        $('#produitDiv').show();
         $('#armeDiv').hide();
         $('#armeDiv option[value="default"]').prop('selected', true);
     }

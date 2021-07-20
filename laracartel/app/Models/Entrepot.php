@@ -20,4 +20,8 @@ class Entrepot extends Model
     public function gerant() {
         return $this->belongsTo(User::class, 'gerant');
     }
+
+    public function stocks() {
+        return $this->hasMany(Stock::class);
+    }
 }
