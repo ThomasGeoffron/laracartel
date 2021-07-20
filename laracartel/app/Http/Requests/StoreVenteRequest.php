@@ -27,7 +27,8 @@ class StoreVenteRequest extends FormRequest
             'stock' => 'required|exists:stock,id',
             'transport' => 'required|exists:transport,id',
             'client' => 'required|exists:client,id',
-            'qte' => 'required|min:1|max:'
+            'date' => 'required|date',
+            'qte' => 'required|min:1'
         ];
     }
 }

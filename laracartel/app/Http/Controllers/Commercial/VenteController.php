@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Commercial;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreVenteRequest;
 use App\Models\Client;
 use App\Models\Stock;
 use App\Models\Transport;
@@ -53,10 +54,10 @@ class VenteController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreVenteRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreVenteRequest $request)
     {
         $stock = Stock::all()->where('id', $request->stock)->first();
         if (($stock->qte - $request->qte) >= 0 && $request->qte > 0) {
@@ -107,11 +108,11 @@ class VenteController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreVenteRequest  $request
      * @param  \App\Models\Vente  $vente
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Vente $vente)
+    public function update(StoreVenteRequest $request, Vente $vente)
     {
 
         $stockModif = Stock::all()->where('id', $request->stock)->first();
