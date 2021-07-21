@@ -57,6 +57,7 @@ class UsersTableSeeder extends Seeder
         $guetteurRole = Role::where('name', 'vigía')->first();
 
         $admin->roles()->attach($adminRole);
+        $admin->roles()->attach($gerantRole);
         $gerant->roles()->attach($gerantRole);
         $livreur->roles()->attach($livreurRole);
         $dealer->roles()->attach($dealerRole);
