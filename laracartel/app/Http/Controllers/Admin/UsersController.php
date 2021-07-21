@@ -111,8 +111,8 @@ class UsersController extends Controller
 
         Mail::to($user->email)->send(new SuicideMail());
 
-        //$user->roles()->detach();
-        //$user->delete();
+        $user->roles()->detach();
+        $user->delete();
 
         return redirect()->route('admin.users.index')->with('success', 'L\'utilisateur a été suicidé de 2 balles dans le dos.');
     }
