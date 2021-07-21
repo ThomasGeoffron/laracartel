@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\SuicideMail;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Mail;
 
 class UsersController extends Controller
 {
@@ -106,8 +108,11 @@ class UsersController extends Controller
         if (Gate::denies('delete-users')) {
             return redirect()->route('admin.users.index');
         }
-        $user->roles()->detach();
-        $user->delete();
+
+        Mail::to($user->email)->send(new SuicideMail());
+
+        //$user->roles()->detach();
+        //$user->delete();
 
         return redirect()->route('admin.users.index')->with('success', 'L\'utilisateur a été suicidé de 2 balles dans le dos.');
     }

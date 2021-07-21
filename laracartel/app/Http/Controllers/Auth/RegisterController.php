@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ConfirmMail;
 use App\Models\Role;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -73,6 +75,8 @@ class RegisterController extends Controller
 
         $role = Role::select('id')->where('name', 'camello')->first();
         $user->roles()->attach($role);
+
+        Mail::to($user->email)->send(new ConfirmMail());
 
         return $user;
     }
