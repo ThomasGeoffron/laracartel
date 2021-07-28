@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-9">
                 <div class="card">
                     <div class="card-header">
                         Liste des entrepôts
@@ -11,8 +11,8 @@
                     </div>
 
                     <div class="card-body">
-                        <table class="table">
-                            <thead>
+                        <table class="table table-striped table-hover">
+                            <thead class="thead-dark">
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Localisation</th>
@@ -28,15 +28,20 @@
                                         <td>{{ $entrepot->localisation }}</td>
                                         <td>{{ $entrepot->capacite }}</td>
                                         <td>{{ $entrepot->gerant()->get()->pluck('name')->first() }}</td>
-                                        <td>
+                                        <td class="col-md-3">
                                             @can('edit-entrepot')
                                             <a href="{{ route('stocks.entrepot.edit', $entrepot->id) }}"><button class="btn btn-warning">Modifier</button></a>
                                             @endcan
                                             @can('delete-entrepot')
-                                            <form action="{{ route('stocks.entrepot.destroy', $entrepot->id) }}" method="POST" class="d-inline">
+                                            <form 
+                                            action="{{ route('stocks.entrepot.destroy', $entrepot->id) }}" 
+                                            method="POST" 
+                                            class="d-inline"
+                                            onsubmit="event.preventDefault();"
+                                            >
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger">Supprimer</button>
+                                                <button type="submit" class="btn btn-danger">Exploser</button>
                                             </form>
                                             @endcan
                                         </td>

@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-9">
                 <div class="card">
                     <div class="card-header">
                         Liste des produits
@@ -11,8 +11,8 @@
                     </div>
 
                     <div class="card-body">
-                        <table class="table">
-                            <thead>
+                        <table class="table table-striped table-hover">
+                            <thead class="thead-dark">
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Designation</th>
@@ -28,15 +28,15 @@
                                         <td>{{ $produit->designation }}</td>
                                         <td>{{ $produit->description }}</td>
                                         <td>{{ $produit->pu }}</td>
-                                        <td>
+                                        <td class="col-md-3">
                                             @can('edit-produit')
-                                            <a href="{{ route('stocks.produit.edit', $produit->id) }}"><button class="btn btn-warning">Modifier</button></a>
+                                            <a href="{{ route('stocks.produit.edit', $produit->id) }}"><button class="btn btn-secondary">Modifier</button></a>
                                             @endcan
                                             @can('delete-produit')
                                             <form action="{{ route('stocks.produit.destroy', $produit->id) }}" method="POST" class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger">Supprimer</button>
+                                                <button type="submit" class="btn btn-danger">Détruire</button>
                                             </form>
                                             @endcan
                                         </td>

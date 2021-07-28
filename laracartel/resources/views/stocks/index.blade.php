@@ -11,8 +11,8 @@
                     </div>
 
                     <div class="card-body">
-                        <table class="table">
-                            <thead>
+                        <table class="table table-stripes table-hover">
+                            <thead class="thead-dark">
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Entrepôt</th>

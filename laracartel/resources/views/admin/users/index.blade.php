@@ -3,13 +3,13 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-9">
                 <div class="card">
                     <div class="card-header">Liste des utilisateurs</div>
 
                     <div class="card-body">
-                        <table class="table">
-                            <thead>
+                        <table class="table table-striped table-hover">
+                            <thead class="thead-dark">
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Nom</th>
@@ -27,7 +27,7 @@
                                         <td>{{ implode(', ', $user->roles()->get()->pluck('name')->toArray()) }}</td>
                                         <td>
                                             @can('edit-users')
-                                            <a href="{{ route('admin.users.edit', $user->id) }}"><button class="btn btn-warning">Modifier</button></a>
+                                            <a href="{{ route('admin.users.edit', $user->id) }}"><button class="btn btn-secondary">Modifier</button></a>
                                             @endcan
                                             @can('delete-users')
                                             <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" class="d-inline">

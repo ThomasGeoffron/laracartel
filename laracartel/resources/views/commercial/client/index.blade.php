@@ -11,8 +11,8 @@
                     </div>
 
                     <div class="card-body">
-                        <table class="table">
-                            <thead>
+                        <table class="table table-striped table-hover">
+                            <thead class="thead-dark">
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Nom</th>
@@ -30,10 +30,14 @@
                                         <td>{{ $client->siege }}</td>
                                         <td>
                                             @can('edit-client')
-                                            <a href="{{ route('commercial.client.edit', $client->id) }}"><button class="btn btn-warning">Modifier</button></a>
+                                            <a href="{{ route('commercial.client.edit', $client->id) }}"><button class="btn btn-secondary">Modifier</button></a>
                                             @endcan
                                             @can('delete-client')
-                                            <form action="{{ route('commercial.client.destroy', $client->id) }}" method="POST" class="d-inline">
+                                            <form 
+                                            action="{{ route('commercial.client.destroy', $client->id) }}" 
+                                            method="POST" 
+                                            class="d-inline"
+                                            onsubmit="return confirm('Etes-vous sur?')">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger">Supprimer</button>
