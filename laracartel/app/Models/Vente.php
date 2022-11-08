@@ -8,4 +8,25 @@ use Illuminate\Database\Eloquent\Model;
 class Vente extends Model
 {
     use HasFactory;
+
+    protected $table = "vente";
+    protected $fillable = [
+        'stock',
+        'transport',
+        'client',
+        'date',
+        'qte'
+    ];
+
+    public function stock() {
+        return $this->belongsTo(Stock::class, 'stock');
+    }
+
+    public function transport() {
+        return $this->belongsTo(Transport::class, 'transport');
+    }
+
+    public function client() {
+        return $this->belongsTo(Client::class, 'client');
+    }
 }

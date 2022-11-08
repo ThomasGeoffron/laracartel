@@ -9,5 +9,16 @@ class Transport extends Model
 {
     use HasFactory;
 
-    protected $table = "tranport";
+    protected $fillable = [
+        'user',
+        'vehicule',
+        'depart',
+        'destination'
+    ];
+
+    protected $table = "transport";
+
+    public function user() {
+        return $this->belongsTo(User::class, 'user');
+    }
 }

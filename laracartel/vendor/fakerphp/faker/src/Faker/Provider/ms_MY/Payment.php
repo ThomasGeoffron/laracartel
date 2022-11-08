@@ -51,7 +51,7 @@ class Payment extends \Faker\Provider\Payment
         'Deutsche Bank (Malaysia) Berhad',
         'HSBC Bank Malaysia Berhad',
         'India International Bank (Malaysia) Berhad',
-        'Industrial and Commercial Bank of China (Malaysia) Berhad',
+        'Industrial and commercial Bank of China (Malaysia) Berhad',
         'J.P. Morgan Chase Bank Berhad',
         'Mizuho Bank (Malaysia) Berhad',
         'National Bank of Abu Dhabi Malaysia Berhad',

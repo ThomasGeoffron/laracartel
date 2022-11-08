@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Arme extends Model
 {
     use HasFactory;
+
+    protected $table = "arme";
+
+    protected $fillable = [
+        'designation',
+        'description',
+        'munition'
+    ];
 }

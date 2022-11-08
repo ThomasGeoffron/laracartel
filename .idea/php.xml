@@ -107,13 +107,13 @@
       <path value="$PROJECT_DIR$/laracartel/vendor/phpdocumentor/type-resolver" />
       <path value="$PROJECT_DIR$/laracartel/vendor/graham-campbell/result-type" />
       <path value="$PROJECT_DIR$/laracartel/vendor/composer" />
-      <path value="$PROJECT_DIR$/laracartel/vendor/doctrine/dbal" />
-      <path value="$PROJECT_DIR$/laracartel/vendor/doctrine/cache" />
-      <path value="$PROJECT_DIR$/laracartel/vendor/doctrine/deprecations" />
-      <path value="$PROJECT_DIR$/laracartel/vendor/doctrine/event-manager" />
+      <path value="$PROJECT_DIR$/laracartel/vendor/psr/http-factory" />
+      <path value="$PROJECT_DIR$/laracartel/vendor/laravel/ui" />
     </include_path>
   </component>
-  <component name="PhpProjectSharedConfiguration" php_language_level="7.3" />
+  <component name="PhpProjectSharedConfiguration" php_language_level="7.3">
+    <option name="suggestChangeDefaultLanguageLevel" value="false" />
+  </component>
   <component name="PhpUnit">
     <phpunit_settings>
       <PhpUnitSettings custom_loader_path="$PROJECT_DIR$/laracartel/vendor/autoload.php" />

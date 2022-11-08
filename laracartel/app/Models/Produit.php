@@ -11,4 +11,9 @@ class Produit extends Model
 
     protected $table = "produit";
 
+    protected $fillable = [
+        'designation',
+        'description',
+        'pu'
+    ];
 }

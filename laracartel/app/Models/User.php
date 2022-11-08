@@ -44,4 +44,20 @@ class User extends Authenticatable
     public function superieur() {
         return $this->belongsTo(User::class, 'superieur');
     }
+
+    public function roles() {
+        return $this->belongsToMany('App\Models\Role');
+    }
+
+    public function isAdmin() {
+        $this->roles()->where('name', 'jefe')->first();
+    }
+
+    public function hasPermission(array $roles) {
+        return $this->roles()->whereIn('name', $roles)->first();
+    }
+
+    public function isTransport() {
+        return $this->roles()->whereIn('name', 'repartidor');
+    }
 }
