@@ -9,7 +9,6 @@ class Transport extends Model
 {
     use HasFactory;
 
-
     protected $fillable = [
         'user',
         'vehicule',
